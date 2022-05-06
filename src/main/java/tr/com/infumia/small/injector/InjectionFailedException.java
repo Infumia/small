@@ -31,7 +31,7 @@ public final class InjectionFailedException extends RuntimeException {
   private final Dependency dependency;
 
   public InjectionFailedException(final Dependency dependency, final Exception exception) {
-    super("SlimJar failed to inject dependency: name -> " + dependency, exception);
+    super("Small failed to inject dependency: name -> " + dependency, exception);
     this.dependency = dependency;
   }
 

@@ -47,14 +47,14 @@ public final class ModuleDependencyDataProvider implements DependencyDataProvide
 
   @Override
   public DependencyData get() throws IOException, ReflectiveOperationException {
-    final URL depFileURL = new URL("jar:file:" + this.moduleUrl.getFile() + "!/slimjar.json");
+    final URL depFileURL = new URL("jar:file:" + this.moduleUrl.getFile() + "!/small.json");
     final URLConnection connection = depFileURL.openConnection();
     if (!(connection instanceof JarURLConnection)) {
       throw new AssertionError("Invalid Module URL provided(Non-Jar File)");
     }
     final JarURLConnection jarURLConnection = (JarURLConnection) connection;
     final JarFile jarFile = jarURLConnection.getJarFile();
-    final ZipEntry dependencyFileEntry = jarFile.getEntry("slimjar.json");
+    final ZipEntry dependencyFileEntry = jarFile.getEntry("small.json");
     if (dependencyFileEntry == null) {
       return new DependencyData(
         Collections.emptySet(),

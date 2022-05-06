@@ -71,7 +71,7 @@ public final class ReflectiveJarRelocatorFacadeFactory implements JarRelocatorFa
   }
 
   public static JarRelocatorFacadeFactory create(final Path downloadPath, final Collection<Repository> repositories, final InjectableClassLoader classLoader) throws URISyntaxException, ReflectiveOperationException, NoSuchAlgorithmException, IOException {
-    ApplicationBuilder.injecting("SlimJar", classLoader)
+    ApplicationBuilder.injecting("Small", classLoader)
       .downloadDirectoryPath(downloadPath)
       .preResolutionDataProviderFactory(a -> Collections::emptyMap)
       .dataProviderFactory(url -> () -> ReflectiveJarRelocatorFacadeFactory.getJarRelocatorDependency(repositories))

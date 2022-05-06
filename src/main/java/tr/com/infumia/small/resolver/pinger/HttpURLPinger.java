@@ -37,7 +37,7 @@ public final class HttpURLPinger implements URLPinger {
 
   private static final ProcessLogger LOGGER = LogDispatcher.getMediatingLogger();
 
-  private static final String SLIMJAR_USER_AGENT = "SlimjarApplication/* URL Validation Ping";
+  private static final String SMALL_USER_AGENT = "SmallApplication/* URL Validation Ping";
 
   private static final Collection<String> SUPPORTED_PROTOCOLS = Arrays.asList("HTTP", "HTTPS");
 
@@ -59,7 +59,7 @@ public final class HttpURLPinger implements URLPinger {
     try {
       connection = (HttpURLConnection) url.openConnection();
       connection.setConnectTimeout(1000 * 5);
-      connection.addRequestProperty("User-Agent", HttpURLPinger.SLIMJAR_USER_AGENT);
+      connection.addRequestProperty("User-Agent", HttpURLPinger.SMALL_USER_AGENT);
       connection.connect();
       final boolean result = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
       HttpURLPinger.LOGGER.debug("Ping {1} for {0}", url.toString(), result ? "successful" : "failed");

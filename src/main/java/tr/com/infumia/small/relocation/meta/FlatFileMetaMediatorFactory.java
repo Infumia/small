@@ -32,7 +32,7 @@ public final class FlatFileMetaMediatorFactory implements MetaMediatorFactory {
 
   @Override
   public MetaMediator create(final Path path) {
-    final Path metaPath = path.getParent().resolve(path.getFileName().toString() + ".slimjar_meta");
+    final Path metaPath = path.getParent().resolve(path.getFileName().toString() + ".small_meta");
     if (!Files.exists(metaPath)) {
       try {
         Files.createDirectories(metaPath);

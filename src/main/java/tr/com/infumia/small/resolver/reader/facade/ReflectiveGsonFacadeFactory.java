@@ -72,7 +72,7 @@ public final class ReflectiveGsonFacadeFactory implements GsonFacadeFactory {
   }
 
   public static GsonFacadeFactory create(final Path downloadPath, final Collection<Repository> repositories, final InjectableClassLoader classLoader) throws ReflectiveOperationException, NoSuchAlgorithmException, IOException, URISyntaxException {
-    ApplicationBuilder.injecting("SlimJar", classLoader)
+    ApplicationBuilder.injecting("Small", classLoader)
       .downloadDirectoryPath(downloadPath)
       .dataProviderFactory(url -> () -> ReflectiveGsonFacadeFactory.getGsonDependency(repositories))
       .relocatorFactory(rules -> new PassthroughRelocator())

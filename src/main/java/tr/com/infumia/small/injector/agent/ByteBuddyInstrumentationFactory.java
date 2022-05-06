@@ -59,7 +59,7 @@ public final class ByteBuddyInstrumentationFactory implements InstrumentationFac
 
   private static final String AGENT_CLASS = "ClassLoaderAgent";
 
-  private static final String AGENT_PACKAGE = "io#github#slimjar#injector#agent";
+  private static final String AGENT_PACKAGE = "tr#com#infumia#small#injector#agent";
 
   private static final String BYTE_BUDDY_AGENT_CLASS = "net#bytebuddy#agent#ByteBuddyAgent";
 
@@ -69,7 +69,7 @@ public final class ByteBuddyInstrumentationFactory implements InstrumentationFac
 
   private final JarRelocatorFacadeFactory relocatorFacadeFactory;
 
-  public ByteBuddyInstrumentationFactory(final JarRelocatorFacadeFactory relocatorFacadeFactory) throws ReflectiveOperationException, NoSuchAlgorithmException, IOException, URISyntaxException {
+  public ByteBuddyInstrumentationFactory(final JarRelocatorFacadeFactory relocatorFacadeFactory) {
     this.relocatorFacadeFactory = relocatorFacadeFactory;
     this.agentJarUrl = InstrumentationInjectable.class.getClassLoader().getResource(ByteBuddyInstrumentationFactory.AGENT_JAR);
     this.extractor = new TemporaryModuleExtractor();
@@ -82,7 +82,7 @@ public final class ByteBuddyInstrumentationFactory implements InstrumentationFac
   }
 
   private static String generatePattern() {
-    return String.format("slimjar.%s", UUID.randomUUID());
+    return String.format("small.%s", UUID.randomUUID());
   }
 
   private static DependencyData getDependency() throws MalformedURLException {
@@ -109,14 +109,14 @@ public final class ByteBuddyInstrumentationFactory implements InstrumentationFac
     final RelocationRule relocationRule = new RelocationRule(Packages.fix(ByteBuddyInstrumentationFactory.AGENT_PACKAGE), pattern, Collections.emptySet(), Collections.emptySet());
     final Relocator relocator = new JarFileRelocator(Collections.singleton(relocationRule), this.relocatorFacadeFactory);
     final File inputFile = new File(extractedURL.toURI());
-    final File relocatedFile = File.createTempFile("slimjar-agent", ".jar");
+    final File relocatedFile = File.createTempFile("small-agent", ".jar");
     final InjectableClassLoader classLoader = new IsolatedInjectableClassLoader();
     relocator.relocate(inputFile, relocatedFile);
     JarManifestGenerator.with(relocatedFile.toURI())
       .attribute("Manifest-Version", "1.0")
       .attribute("Agent-Class", relocatedAgentClass)
       .generate();
-    ApplicationBuilder.injecting("SlimJar-Agent", classLoader)
+    ApplicationBuilder.injecting("Small-Agent", classLoader)
       .dataProviderFactory(dataUrl -> ByteBuddyInstrumentationFactory::getDependency)
       .relocatorFactory(rules -> new PassthroughRelocator())
       .relocationHelperFactory(rel -> (dependency, file) -> file)
