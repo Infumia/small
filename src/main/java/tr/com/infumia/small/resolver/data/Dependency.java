@@ -67,6 +67,10 @@ public final class Dependency {
     return this.version;
   }
 
+  public boolean hasSnapshotId() {
+    return this.snapshotId != null && this.snapshotId.isEmpty();
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(this.groupId, this.artifactId, this.version);
@@ -89,7 +93,7 @@ public final class Dependency {
   @Override
   public String toString() {
     final String snapshotId = this.getSnapshotId();
-    final String suffix = snapshotId != null && snapshotId.length() > 0 ? ":" + snapshotId : "";
+    final String suffix = this.hasSnapshotId() ? ":" + snapshotId : "";
     return this.getGroupId() + ":" + this.getArtifactId() + ":" + this.getVersion() + suffix;
   }
 }
