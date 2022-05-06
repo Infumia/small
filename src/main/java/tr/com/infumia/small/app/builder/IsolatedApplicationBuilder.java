@@ -66,11 +66,11 @@ public final class IsolatedApplicationBuilder extends ApplicationBuilder {
     for (final URL module : moduleUrls) {
       final DependencyDataProvider moduleDataProvider = this.getModuleDataProviderFactory().create(module);
       final DependencyData dependencyData = moduleDataProvider.get();
-      // TODO:: fetch isolated pre-resolutions
+      //  fetch isolated pre-resolutions
       injector.inject(classLoader, dependencyData, preResolutionResultMap);
     }
     final Class<Application> applicationClass = (Class<Application>) Class.forName(this.isolationConfiguration.getApplicationClass(), true, classLoader);
-    // TODO:: Fix constructor resolution
+    //  Fix constructor resolution
     return applicationClass.getConstructor(Parameters.typesFrom(this.arguments)).newInstance(this.arguments);
   }
 }

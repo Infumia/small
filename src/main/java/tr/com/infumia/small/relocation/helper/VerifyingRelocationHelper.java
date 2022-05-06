@@ -63,7 +63,7 @@ public final class VerifyingRelocationHelper implements RelocationHelper {
         }
       } catch (final Exception exception) {
         // Possible incomplete relocation present.
-        // todo: Log incident
+        //  Log incident
         //noinspection ResultOfMethodCallIgnored
         relocatedFile.delete();
       }
