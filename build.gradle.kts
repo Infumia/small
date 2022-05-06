@@ -77,8 +77,8 @@ publishing {
       artifact(tasks["sourcesJar"])
       artifact(tasks["javadocJar"])
       pom {
-        name.set("Infumia Library")
-        description.set("Infumia library plugin.")
+        name.set("Small")
+        description.set("Runtime dependency management tool.")
         url.set("https://infumia.com.tr/")
         licenses {
           license {
@@ -94,9 +94,9 @@ publishing {
           }
         }
         scm {
-          connection.set("scm:git:git://github.com/infumia/infumialib.git")
-          developerConnection.set("scm:git:ssh://github.com/infumia/infumialib.git")
-          url.set("https://github.com/infumia/infumialib")
+          connection.set("scm:git:git://github.com/infumia/small.git")
+          developerConnection.set("scm:git:ssh://github.com/infumia/small.git")
+          url.set("https://github.com/infumia/small")
         }
       }
     }
