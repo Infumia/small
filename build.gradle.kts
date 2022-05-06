@@ -17,40 +17,40 @@ java {
 
 tasks {
   compileJava {
-	options.encoding = Charsets.UTF_8.name()
+    options.encoding = Charsets.UTF_8.name()
   }
 
   jar {
-	define()
+    define()
   }
 
   javadoc {
-	options.encoding = Charsets.UTF_8.name()
-	(options as StandardJavadocDocletOptions).tags("todo")
+    options.encoding = Charsets.UTF_8.name()
+    (options as StandardJavadocDocletOptions).tags("todo")
   }
 
   val javadocJar by creating(Jar::class) {
-	dependsOn("javadoc")
-	define(classifier = "javadoc")
-	from(javadoc)
+    dependsOn("javadoc")
+    define(classifier = "javadoc")
+    from(javadoc)
   }
 
   val sourcesJar by creating(Jar::class) {
-	dependsOn("classes")
-	define(classifier = "sources")
-	from(sourceSets["main"].allSource)
+    dependsOn("classes")
+    define(classifier = "sources")
+    from(sourceSets["main"].allSource)
   }
 
   build {
-	dependsOn(jar)
-	dependsOn(sourcesJar)
-	dependsOn(javadocJar)
+    dependsOn(jar)
+    dependsOn(sourcesJar)
+    dependsOn(javadocJar)
   }
 }
 
 repositories {
   mavenCentral()
-  maven(SNAPSHOTS)
+  maven("https://oss.sonatype.org/content/repositories/snapshots/")
   mavenLocal()
 }
 
@@ -70,46 +70,46 @@ dependencies {
 
 publishing {
   publications {
-	val publication = create<MavenPublication>("mavenJava") {
-	  groupId = project.group.toString()
-	  artifactId = projectName
-	  version = project.version.toString()
+    val publication = create<MavenPublication>("mavenJava") {
+      groupId = project.group.toString()
+      artifactId = project.name
+      version = project.version.toString()
 
-	  from(components["java"])
-	  artifact(tasks["sourcesJar"])
-	  artifact(tasks["javadocJar"])
-	  pom {
-		name.set("Infumia Library")
-		description.set("Infumia library plugin.")
-		url.set("https://infumia.com.tr/")
-		licenses {
-		  license {
-			name.set("MIT License")
-			url.set("https://mit-license.org/license.txt")
-		  }
-		}
-		developers {
-		  developer {
-			id.set("portlek")
-			name.set("Hasan Demirtaş")
-			email.set("utsukushihito@outlook.com")
-		  }
-		}
-		scm {
-		  connection.set("scm:git:git://github.com/infumia/infumialib.git")
-		  developerConnection.set("scm:git:ssh://github.com/infumia/infumialib.git")
-		  url.set("https://github.com/infumia/infumialib")
-		}
-	  }
-	}
+      from(components["java"])
+      artifact(tasks["sourcesJar"])
+      artifact(tasks["javadocJar"])
+      pom {
+        name.set("Infumia Library")
+        description.set("Infumia library plugin.")
+        url.set("https://infumia.com.tr/")
+        licenses {
+          license {
+            name.set("MIT License")
+            url.set("https://mit-license.org/license.txt")
+          }
+        }
+        developers {
+          developer {
+            id.set("portlek")
+            name.set("Hasan Demirtaş")
+            email.set("utsukushihito@outlook.com")
+          }
+        }
+        scm {
+          connection.set("scm:git:git://github.com/infumia/infumialib.git")
+          developerConnection.set("scm:git:ssh://github.com/infumia/infumialib.git")
+          url.set("https://github.com/infumia/infumialib")
+        }
+      }
+    }
 
-	signing {
-	  isRequired = signRequired
-	  if (isRequired) {
-		useGpgCmd()
-		sign(publication)
-	  }
-	}
+    signing {
+      isRequired = signRequired
+      if (isRequired) {
+        useGpgCmd()
+        sign(publication)
+      }
+    }
   }
 }
 

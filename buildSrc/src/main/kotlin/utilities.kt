@@ -1,5 +1,7 @@
+import org.gradle.api.tasks.bundling.AbstractArchiveTask
+
 fun AbstractArchiveTask.define(
-  name: String = project.getQualifiedProjectName(),
+  name: String = project.name,
   classifier: String? = null,
   version: String? = null
 ) {

@@ -12,3 +12,7 @@ tasks {
     kotlinOptions.jvmTarget = "17"
   }
 }
+
+repositories {
+  mavenCentral()
+}
