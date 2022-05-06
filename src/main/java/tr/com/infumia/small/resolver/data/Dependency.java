@@ -68,7 +68,7 @@ public final class Dependency {
   }
 
   public boolean hasSnapshotId() {
-    return this.snapshotId != null && this.snapshotId.isEmpty();
+    return this.snapshotId != null && !this.snapshotId.isEmpty();
   }
 
   @Override
