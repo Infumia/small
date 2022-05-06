@@ -57,7 +57,7 @@ public final class VerifyingRelocationHelper implements RelocationHelper {
     final MetaMediator metaMediator = this.mediatorFactory.create(relocatedFile.toPath());
     if (relocatedFile.exists()) {
       try {
-        final String ownerHash = metaMediator.readAttribute("slimjar.owner");
+        final String ownerHash = metaMediator.readAttribute("small.owner");
         if (this.selfHash != null && ownerHash != null && this.selfHash.trim().equals(ownerHash.trim())) {
           return relocatedFile;
         }
@@ -69,7 +69,7 @@ public final class VerifyingRelocationHelper implements RelocationHelper {
       }
     }
     this.relocator.relocate(file, relocatedFile);
-    metaMediator.writeAttribute("slimjar.owner", this.selfHash);
+    metaMediator.writeAttribute("small.owner", this.selfHash);
     return relocatedFile;
   }
 }
