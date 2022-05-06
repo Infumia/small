@@ -24,8 +24,8 @@
 
 package tr.com.infumia.small.resolver.data;
 
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 public final class Dependency {
 
@@ -35,11 +35,11 @@ public final class Dependency {
 
   private final String snapshotId;
 
-  private final Set<Dependency> transitive;
+  private final Collection<Dependency> transitive;
 
   private final String version;
 
-  public Dependency(final String groupId, final String artifactId, final String version, final String snapshotId, final Set<Dependency> transitive) {
+  public Dependency(final String groupId, final String artifactId, final String version, final String snapshotId, final Collection<Dependency> transitive) {
     this.groupId = groupId;
     this.artifactId = artifactId;
     this.version = version;
@@ -59,7 +59,7 @@ public final class Dependency {
     return this.snapshotId;
   }
 
-  public Set<Dependency> getTransitive() {
+  public Collection<Dependency> getTransitive() {
     return this.transitive;
   }
 
